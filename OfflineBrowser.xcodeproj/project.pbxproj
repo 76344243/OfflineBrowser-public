@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		004263BE6E857DEE3DBB63D8 /* OfflineBrowser/Network/CookieVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4B779AC994BC050758F7D /* OfflineBrowser/Network/CookieVault.swift */; };
+		1061111359CC31D894550048 /* OfflineBrowser/Archive/ArchiveStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB70E468DFCA34059E8D3B /* OfflineBrowser/Archive/ArchiveStore.swift */; };
+		14FB1A1DE2C58B0EB1091747 /* OfflineBrowser/App/AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB68261A2A6F1DFCCD47510 /* OfflineBrowser/App/AppEnvironment.swift */; };
+		2279C79A2BDA29936FF7FD30 /* OfflineBrowser/App/BackgroundDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */; };
+		42251791D3A7D4E4B293198B /* OfflineBrowser/Network/URLMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA296ADF7FB703054CDD4332 /* OfflineBrowser/Network/URLMapper.swift */; };
+		489E73E741D364CE3D835E24 /* OfflineBrowser/Viewer/WebsiteSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E230AE126C7147E843BA4 /* OfflineBrowser/Viewer/WebsiteSession.swift */; };
+		4A0B039F49C9F0C0E3107E04 /* OfflineBrowser/Discovery/ModuleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */; };
+		4AA4BFF7540558AEB2FC1D02 /* OfflineBrowser/Verification/ArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6DFB98A543076567C9F64 /* OfflineBrowser/Verification/ArchitectureTests.swift */; };
+		56E72123F0EFFB339D158F0D /* OfflineBrowser/Network/TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3BB1F04C8D2A48251BEC02 /* OfflineBrowser/Network/TransferService.swift */; };
+		57F9EE6B2534D09E798CC45B /* OfflineBrowser/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */; };
+		5AD87F49A0818C8D2C9D31DD /* OfflineBrowser/Discovery/AssetStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8066A44A5A7AADCE0798682 /* OfflineBrowser/Discovery/AssetStrings.swift */; };
+		65E15E14EEA6F3C7429C6211 /* OfflineBrowser/Discovery/DocumentRewriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0166FF5798002615828DF27 /* OfflineBrowser/Discovery/DocumentRewriter.swift */; };
+		6B57B097E81CA92515A2C3EE /* OfflineBrowser/Models/Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CE87BE174B54FA14B4EE25 /* OfflineBrowser/Models/Models.swift */; };
+		731B893C156F322F882F1766 /* OfflineBrowser/Network/LocalContentServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A8B7E6EA74046A0986B0C /* OfflineBrowser/Network/LocalContentServer.swift */; };
+		76B24203970F704D0043F7B3 /* OfflineBrowser/PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */; };
+		9A25C955CEC003561A5FFAFF /* OfflineBrowser/Resources/Bridge in Resources */ = {isa = PBXBuildFile; fileRef = 91428C72F0F104C9F5E1DD2C /* OfflineBrowser/Resources/Bridge */; };
+		9A8F12079C7ECAC4303796AC /* OfflineBrowser/Download/DownloadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0BAE831E70AE5D682A3764 /* OfflineBrowser/Download/DownloadCoordinator.swift */; };
+		B00000000000000000000003 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B00000000000000000000002 /* SwiftSoup */; };
+		B406D68636576FBFA264441E /* OfflineBrowser/Verification/IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AD568BF816CC7753ED682 /* OfflineBrowser/Verification/IntegrationTests.swift */; };
+		B8A176D858CBE13345179D64 /* OfflineBrowser/Network/ResourceBroker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B14408A2605EDB2C63A05A3 /* OfflineBrowser/Network/ResourceBroker.swift */; };
+		C00000000000000000000010 /* OfflineBrowserUITests/LibraryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000009 /* OfflineBrowserUITests/LibraryUITests.swift */; };
+		C105DF9EC920C822F3B1A3D9 /* OfflineBrowser/Discovery/SupportProbe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAF300AE98CF03AC0486754 /* OfflineBrowser/Discovery/SupportProbe.swift */; };
+		D4F73DBA11377E10BDBAE255 /* OfflineBrowser/Persistence/LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554F7E2BF4A450FEBE591807 /* OfflineBrowser/Persistence/LibraryStore.swift */; };
+		E681CC342ABA572CD4156773 /* OfflineBrowser/App/OfflineBrowserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D64CA216F1E634068DF24 /* OfflineBrowser/App/OfflineBrowserApp.swift */; };
+		EBB731E5E8E1F09C8DD67354 /* OfflineBrowser/Views/LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16D54786CDAA617BD8ADBA /* OfflineBrowser/Views/LibraryView.swift */; };
+		EF9EB14119611E7414DCF180 /* OfflineBrowser/Network/TransferLimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF24BBDD6160FA6E0822223 /* OfflineBrowser/Network/TransferLimiter.swift */; };
+		F7FD7E87494CA77F620D2813 /* OfflineBrowser/Network/NetworkPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6221AFDC2A9DCEB92FAD2F8A /* OfflineBrowser/Network/NetworkPolicy.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C00000000000000000000012 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A00000000000000000000002;
+			remoteInfo = OfflineBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0A16D54786CDAA617BD8ADBA /* OfflineBrowser/Views/LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Views/LibraryView.swift; sourceTree = "<group>"; };
+		0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OfflineBrowser/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1A3BB1F04C8D2A48251BEC02 /* OfflineBrowser/Network/TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/TransferService.swift; sourceTree = "<group>"; };
+		4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/ModuleScanner.swift; sourceTree = "<group>"; };
+		4B14408A2605EDB2C63A05A3 /* OfflineBrowser/Network/ResourceBroker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/ResourceBroker.swift; sourceTree = "<group>"; };
+		4BAF300AE98CF03AC0486754 /* OfflineBrowser/Discovery/SupportProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/SupportProbe.swift; sourceTree = "<group>"; };
+		554F7E2BF4A450FEBE591807 /* OfflineBrowser/Persistence/LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Persistence/LibraryStore.swift; sourceTree = "<group>"; };
+		6221AFDC2A9DCEB92FAD2F8A /* OfflineBrowser/Network/NetworkPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/NetworkPolicy.swift; sourceTree = "<group>"; };
+		6B8AD568BF816CC7753ED682 /* OfflineBrowser/Verification/IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Verification/IntegrationTests.swift; sourceTree = "<group>"; };
+		6ECB70E468DFCA34059E8D3B /* OfflineBrowser/Archive/ArchiveStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Archive/ArchiveStore.swift; sourceTree = "<group>"; };
+		78D6DFB98A543076567C9F64 /* OfflineBrowser/Verification/ArchitectureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Verification/ArchitectureTests.swift; sourceTree = "<group>"; };
+		7F6D64CA216F1E634068DF24 /* OfflineBrowser/App/OfflineBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/App/OfflineBrowserApp.swift; sourceTree = "<group>"; };
+		8A0BAE831E70AE5D682A3764 /* OfflineBrowser/Download/DownloadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Download/DownloadCoordinator.swift; sourceTree = "<group>"; };
+		91428C72F0F104C9F5E1DD2C /* OfflineBrowser/Resources/Bridge */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OfflineBrowser/Resources/Bridge; sourceTree = "<group>"; };
+		930E230AE126C7147E843BA4 /* OfflineBrowser/Viewer/WebsiteSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Viewer/WebsiteSession.swift; sourceTree = "<group>"; };
+		A00000000000000000000008 /* OfflineBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OfflineBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OfflineBrowser/Assets.xcassets; sourceTree = "<group>"; };
+		B42A8B7E6EA74046A0986B0C /* OfflineBrowser/Network/LocalContentServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/LocalContentServer.swift; sourceTree = "<group>"; };
+		B7CE87BE174B54FA14B4EE25 /* OfflineBrowser/Models/Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Models/Models.swift; sourceTree = "<group>"; };
+		C00000000000000000000002 /* OfflineBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OfflineBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C00000000000000000000009 /* OfflineBrowserUITests/LibraryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowserUITests/LibraryUITests.swift; sourceTree = "<group>"; };
+		C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/App/BackgroundDelegate.swift; sourceTree = "<group>"; };
+		CAF24BBDD6160FA6E0822223 /* OfflineBrowser/Network/TransferLimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/TransferLimiter.swift; sourceTree = "<group>"; };
+		E0166FF5798002615828DF27 /* OfflineBrowser/Discovery/DocumentRewriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/DocumentRewriter.swift; sourceTree = "<group>"; };
+		E8066A44A5A7AADCE0798682 /* OfflineBrowser/Discovery/AssetStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/AssetStrings.swift; sourceTree = "<group>"; };
+		EA296ADF7FB703054CDD4332 /* OfflineBrowser/Network/URLMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/URLMapper.swift; sourceTree = "<group>"; };
+		EFF4B779AC994BC050758F7D /* OfflineBrowser/Network/CookieVault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/CookieVault.swift; sourceTree = "<group>"; };
+		FBB68261A2A6F1DFCCD47510 /* OfflineBrowser/App/AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/App/AppEnvironment.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A00000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000003 /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A00000000000000000000003 = {
+			isa = PBXGroup;
+			children = (
+				FBB68261A2A6F1DFCCD47510 /* OfflineBrowser/App/AppEnvironment.swift */,
+				C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */,
+				7F6D64CA216F1E634068DF24 /* OfflineBrowser/App/OfflineBrowserApp.swift */,
+				6ECB70E468DFCA34059E8D3B /* OfflineBrowser/Archive/ArchiveStore.swift */,
+				E8066A44A5A7AADCE0798682 /* OfflineBrowser/Discovery/AssetStrings.swift */,
+				E0166FF5798002615828DF27 /* OfflineBrowser/Discovery/DocumentRewriter.swift */,
+				4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */,
+				4BAF300AE98CF03AC0486754 /* OfflineBrowser/Discovery/SupportProbe.swift */,
+				8A0BAE831E70AE5D682A3764 /* OfflineBrowser/Download/DownloadCoordinator.swift */,
+				B7CE87BE174B54FA14B4EE25 /* OfflineBrowser/Models/Models.swift */,
+				EFF4B779AC994BC050758F7D /* OfflineBrowser/Network/CookieVault.swift */,
+				B42A8B7E6EA74046A0986B0C /* OfflineBrowser/Network/LocalContentServer.swift */,
+				6221AFDC2A9DCEB92FAD2F8A /* OfflineBrowser/Network/NetworkPolicy.swift */,
+				4B14408A2605EDB2C63A05A3 /* OfflineBrowser/Network/ResourceBroker.swift */,
+				CAF24BBDD6160FA6E0822223 /* OfflineBrowser/Network/TransferLimiter.swift */,
+				1A3BB1F04C8D2A48251BEC02 /* OfflineBrowser/Network/TransferService.swift */,
+				EA296ADF7FB703054CDD4332 /* OfflineBrowser/Network/URLMapper.swift */,
+				554F7E2BF4A450FEBE591807 /* OfflineBrowser/Persistence/LibraryStore.swift */,
+				78D6DFB98A543076567C9F64 /* OfflineBrowser/Verification/ArchitectureTests.swift */,
+				6B8AD568BF816CC7753ED682 /* OfflineBrowser/Verification/IntegrationTests.swift */,
+				930E230AE126C7147E843BA4 /* OfflineBrowser/Viewer/WebsiteSession.swift */,
+				0A16D54786CDAA617BD8ADBA /* OfflineBrowser/Views/LibraryView.swift */,
+				91428C72F0F104C9F5E1DD2C /* OfflineBrowser/Resources/Bridge */,
+				0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */,
+				A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */,
+				A00000000000000000000004 /* Products */,
+				C00000000000000000000009 /* OfflineBrowserUITests/LibraryUITests.swift */,
+			);
+			sourceTree = "<group>";
+		};
+		A00000000000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000008 /* OfflineBrowser.app */,
+				C00000000000000000000002 /* OfflineBrowserUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A00000000000000000000002 /* OfflineBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A00000000000000000000011 /* Build configuration list for PBXNativeTarget "OfflineBrowser" */;
+			buildPhases = (
+				A00000000000000000000005 /* Sources */,
+				A00000000000000000000006 /* Frameworks */,
+				A00000000000000000000007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OfflineBrowser;
+			packageProductDependencies = (
+				B00000000000000000000002 /* SwiftSoup */,
+			);
+			productName = OfflineBrowser;
+			productReference = A00000000000000000000008 /* OfflineBrowser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C00000000000000000000001 /* OfflineBrowserUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C00000000000000000000003 /* Build configuration list for PBXNativeTarget "OfflineBrowserUITests" */;
+			buildPhases = (
+				C00000000000000000000006 /* Sources */,
+				C00000000000000000000007 /* Frameworks */,
+				C00000000000000000000008 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C00000000000000000000011 /* PBXTargetDependency */,
+			);
+			name = OfflineBrowserUITests;
+			productName = OfflineBrowserUITests;
+			productReference = C00000000000000000000002 /* OfflineBrowserUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					A00000000000000000000002 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = A00000000000000000000010 /* Build configuration list for PBXProject "OfflineBrowser" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				de,
+			);
+			mainGroup = A00000000000000000000003;
+			packageReferences = (
+				B00000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+			);
+			productRefGroup = A00000000000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A00000000000000000000002 /* OfflineBrowser */,
+				C00000000000000000000001 /* OfflineBrowserUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A00000000000000000000007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A25C955CEC003561A5FFAFF /* OfflineBrowser/Resources/Bridge in Resources */,
+				76B24203970F704D0043F7B3 /* OfflineBrowser/PrivacyInfo.xcprivacy in Resources */,
+				57F9EE6B2534D09E798CC45B /* OfflineBrowser/Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A00000000000000000000005 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14FB1A1DE2C58B0EB1091747 /* OfflineBrowser/App/AppEnvironment.swift in Sources */,
+				2279C79A2BDA29936FF7FD30 /* OfflineBrowser/App/BackgroundDelegate.swift in Sources */,
+				E681CC342ABA572CD4156773 /* OfflineBrowser/App/OfflineBrowserApp.swift in Sources */,
+				1061111359CC31D894550048 /* OfflineBrowser/Archive/ArchiveStore.swift in Sources */,
+				5AD87F49A0818C8D2C9D31DD /* OfflineBrowser/Discovery/AssetStrings.swift in Sources */,
+				65E15E14EEA6F3C7429C6211 /* OfflineBrowser/Discovery/DocumentRewriter.swift in Sources */,
+				4A0B039F49C9F0C0E3107E04 /* OfflineBrowser/Discovery/ModuleScanner.swift in Sources */,
+				C105DF9EC920C822F3B1A3D9 /* OfflineBrowser/Discovery/SupportProbe.swift in Sources */,
+				9A8F12079C7ECAC4303796AC /* OfflineBrowser/Download/DownloadCoordinator.swift in Sources */,
+				6B57B097E81CA92515A2C3EE /* OfflineBrowser/Models/Models.swift in Sources */,
+				004263BE6E857DEE3DBB63D8 /* OfflineBrowser/Network/CookieVault.swift in Sources */,
+				731B893C156F322F882F1766 /* OfflineBrowser/Network/LocalContentServer.swift in Sources */,
+				F7FD7E87494CA77F620D2813 /* OfflineBrowser/Network/NetworkPolicy.swift in Sources */,
+				B8A176D858CBE13345179D64 /* OfflineBrowser/Network/ResourceBroker.swift in Sources */,
+				EF9EB14119611E7414DCF180 /* OfflineBrowser/Network/TransferLimiter.swift in Sources */,
+				56E72123F0EFFB339D158F0D /* OfflineBrowser/Network/TransferService.swift in Sources */,
+				42251791D3A7D4E4B293198B /* OfflineBrowser/Network/URLMapper.swift in Sources */,
+				D4F73DBA11377E10BDBAE255 /* OfflineBrowser/Persistence/LibraryStore.swift in Sources */,
+				4AA4BFF7540558AEB2FC1D02 /* OfflineBrowser/Verification/ArchitectureTests.swift in Sources */,
+				B406D68636576FBFA264441E /* OfflineBrowser/Verification/IntegrationTests.swift in Sources */,
+				489E73E741D364CE3D835E24 /* OfflineBrowser/Viewer/WebsiteSession.swift in Sources */,
+				EBB731E5E8E1F09C8DD67354 /* OfflineBrowser/Views/LibraryView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C00000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C00000000000000000000010 /* OfflineBrowserUITests/LibraryUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C00000000000000000000011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A00000000000000000000002 /* OfflineBrowser */;
+			targetProxy = C00000000000000000000012 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A00000000000000000000040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A00000000000000000000041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A00000000000000000000042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OfflineBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.local.offlinebrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A00000000000000000000043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = OfflineBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.local.offlinebrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C00000000000000000000004 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.local.offlinebrowser.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OfflineBrowser;
+			};
+			name = Debug;
+		};
+		C00000000000000000000005 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.local.offlinebrowser.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OfflineBrowser;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A00000000000000000000010 /* Build configuration list for PBXProject "OfflineBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000040 /* Debug */,
+				A00000000000000000000041 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A00000000000000000000011 /* Build configuration list for PBXNativeTarget "OfflineBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A00000000000000000000042 /* Debug */,
+				A00000000000000000000043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C00000000000000000000003 /* Build configuration list for PBXNativeTarget "OfflineBrowserUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C00000000000000000000004 /* Debug */,
+				C00000000000000000000005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B00000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.13.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B00000000000000000000002 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B00000000000000000000001 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A00000000000000000000001 /* Project object */;
+}

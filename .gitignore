@@ -1,0 +1,23 @@
+# macOS metadata and AppleDouble sidecar files
+.DS_Store
+._*
+
+# Xcode user state and local build products
+build*/
+**/xcuserdata/
+*.xcuserstate
+*.xcresult/
+
+# Generated Python/runtime files
+__pycache__/
+*.py[cod]
+
+# Local website kits are generated fixtures, not app source.
+KitSites/
+
+# Generated verification output. Keep the hand-written Markdown/Swift reports.
+verification/*.log
+verification/*.png
+verification/*.json
+verification/*attachments/
+verification/reports/

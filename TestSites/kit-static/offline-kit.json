@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "revision": "1",
+  "scope": "./",
+  "entry": "index.html",
+  "offlineEntry": "index.html",
+  "resources": [
+    {
+      "url": "index.html",
+      "mime": "text/html",
+      "bytes": 301,
+      "sha256": "d71adf51b566a344379d3be17b9af6277018e51a141e35d01481dc3bbc185244"
+    },
+    {
+      "url": "style.css",
+      "mime": "text/css",
+      "bytes": 105,
+      "sha256": "3472b849ad32e340b0336b5ec129bd4baa4a80a0047effddab4c3a2369285bf7"
+    }
+  ],
+  "allowedResourceOrigins": [],
+  "offlineChecks": [
+    {
+      "path": "index.html",
+      "selector": "main",
+      "description": "Startseite sichtbar"
+    }
+  ]
+}

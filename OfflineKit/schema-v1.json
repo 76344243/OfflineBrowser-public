@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Offline Kit v1",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "revision",
+    "scope",
+    "entry",
+    "resources"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string"
+    },
+    "entry": {
+      "type": "string"
+    },
+    "offlineEntry": {
+      "type": "string"
+    },
+    "allowedResourceOrigins": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "offlineChecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "selector"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "selector": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "resources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "sha256",
+          "bytes",
+          "mime"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "mime": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
