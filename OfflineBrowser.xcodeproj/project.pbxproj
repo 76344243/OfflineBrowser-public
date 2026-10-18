@@ -13,16 +13,20 @@
 		2279C79A2BDA29936FF7FD30 /* OfflineBrowser/App/BackgroundDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */; };
 		42251791D3A7D4E4B293198B /* OfflineBrowser/Network/URLMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA296ADF7FB703054CDD4332 /* OfflineBrowser/Network/URLMapper.swift */; };
 		489E73E741D364CE3D835E24 /* OfflineBrowser/Viewer/WebsiteSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E230AE126C7147E843BA4 /* OfflineBrowser/Viewer/WebsiteSession.swift */; };
+		5097E40895E9424BBD0A1135 /* OfflineBrowser/Crawler/CrawlerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DD2F784AA94535825AE175 /* OfflineBrowser/Crawler/CrawlerCoordinator.swift */; };
 		4A0B039F49C9F0C0E3107E04 /* OfflineBrowser/Discovery/ModuleScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */; };
 		4AA4BFF7540558AEB2FC1D02 /* OfflineBrowser/Verification/ArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D6DFB98A543076567C9F64 /* OfflineBrowser/Verification/ArchitectureTests.swift */; };
 		56E72123F0EFFB339D158F0D /* OfflineBrowser/Network/TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3BB1F04C8D2A48251BEC02 /* OfflineBrowser/Network/TransferService.swift */; };
 		57F9EE6B2534D09E798CC45B /* OfflineBrowser/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */; };
 		5AD87F49A0818C8D2C9D31DD /* OfflineBrowser/Discovery/AssetStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8066A44A5A7AADCE0798682 /* OfflineBrowser/Discovery/AssetStrings.swift */; };
+		561C1C5E020346A1BBD5F084 /* OfflineBrowser/Crawler/ReplaySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B216C0853284ACCAC013B7F /* OfflineBrowser/Crawler/ReplaySession.swift */; };
 		65E15E14EEA6F3C7429C6211 /* OfflineBrowser/Discovery/DocumentRewriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0166FF5798002615828DF27 /* OfflineBrowser/Discovery/DocumentRewriter.swift */; };
 		6B57B097E81CA92515A2C3EE /* OfflineBrowser/Models/Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CE87BE174B54FA14B4EE25 /* OfflineBrowser/Models/Models.swift */; };
 		731B893C156F322F882F1766 /* OfflineBrowser/Network/LocalContentServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42A8B7E6EA74046A0986B0C /* OfflineBrowser/Network/LocalContentServer.swift */; };
 		76B24203970F704D0043F7B3 /* OfflineBrowser/PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */; };
 		9A25C955CEC003561A5FFAFF /* OfflineBrowser/Resources/Bridge in Resources */ = {isa = PBXBuildFile; fileRef = 91428C72F0F104C9F5E1DD2C /* OfflineBrowser/Resources/Bridge */; };
+		6341047C2DD04F89B202A7BF /* OfflineBrowser/Resources/Replay in Resources */ = {isa = PBXBuildFile; fileRef = 41554B5E04AC4DE88570E67A /* OfflineBrowser/Resources/Replay */; };
+		FC11C72B02964FA394AD9EF0 /* OfflineBrowser/Resources/CrawlerConfig in Resources */ = {isa = PBXBuildFile; fileRef = 62EA279F2850426CBE64B7C4 /* OfflineBrowser/Resources/CrawlerConfig */; };
 		9A8F12079C7ECAC4303796AC /* OfflineBrowser/Download/DownloadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0BAE831E70AE5D682A3764 /* OfflineBrowser/Download/DownloadCoordinator.swift */; };
 		B00000000000000000000003 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B00000000000000000000002 /* SwiftSoup */; };
 		B406D68636576FBFA264441E /* OfflineBrowser/Verification/IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8AD568BF816CC7753ED682 /* OfflineBrowser/Verification/IntegrationTests.swift */; };
@@ -51,11 +55,14 @@
 		0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = OfflineBrowser/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1A3BB1F04C8D2A48251BEC02 /* OfflineBrowser/Network/TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/TransferService.swift; sourceTree = "<group>"; };
 		4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/ModuleScanner.swift; sourceTree = "<group>"; };
+		41554B5E04AC4DE88570E67A /* OfflineBrowser/Resources/Replay */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OfflineBrowser/Resources/Replay; sourceTree = "<group>"; };
 		4B14408A2605EDB2C63A05A3 /* OfflineBrowser/Network/ResourceBroker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/ResourceBroker.swift; sourceTree = "<group>"; };
 		4BAF300AE98CF03AC0486754 /* OfflineBrowser/Discovery/SupportProbe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Discovery/SupportProbe.swift; sourceTree = "<group>"; };
 		554F7E2BF4A450FEBE591807 /* OfflineBrowser/Persistence/LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Persistence/LibraryStore.swift; sourceTree = "<group>"; };
 		6221AFDC2A9DCEB92FAD2F8A /* OfflineBrowser/Network/NetworkPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/NetworkPolicy.swift; sourceTree = "<group>"; };
+		62EA279F2850426CBE64B7C4 /* OfflineBrowser/Resources/CrawlerConfig */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OfflineBrowser/Resources/CrawlerConfig; sourceTree = "<group>"; };
 		6B8AD568BF816CC7753ED682 /* OfflineBrowser/Verification/IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Verification/IntegrationTests.swift; sourceTree = "<group>"; };
+		6B216C0853284ACCAC013B7F /* OfflineBrowser/Crawler/ReplaySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Crawler/ReplaySession.swift; sourceTree = "<group>"; };
 		6ECB70E468DFCA34059E8D3B /* OfflineBrowser/Archive/ArchiveStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Archive/ArchiveStore.swift; sourceTree = "<group>"; };
 		78D6DFB98A543076567C9F64 /* OfflineBrowser/Verification/ArchitectureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Verification/ArchitectureTests.swift; sourceTree = "<group>"; };
 		7F6D64CA216F1E634068DF24 /* OfflineBrowser/App/OfflineBrowserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/App/OfflineBrowserApp.swift; sourceTree = "<group>"; };
@@ -66,6 +73,7 @@
 		A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = OfflineBrowser/Assets.xcassets; sourceTree = "<group>"; };
 		B42A8B7E6EA74046A0986B0C /* OfflineBrowser/Network/LocalContentServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Network/LocalContentServer.swift; sourceTree = "<group>"; };
 		B7CE87BE174B54FA14B4EE25 /* OfflineBrowser/Models/Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Models/Models.swift; sourceTree = "<group>"; };
+		B8DD2F784AA94535825AE175 /* OfflineBrowser/Crawler/CrawlerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/Crawler/CrawlerCoordinator.swift; sourceTree = "<group>"; };
 		C00000000000000000000002 /* OfflineBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OfflineBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C00000000000000000000009 /* OfflineBrowserUITests/LibraryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowserUITests/LibraryUITests.swift; sourceTree = "<group>"; };
 		C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineBrowser/App/BackgroundDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +111,8 @@
 				C9D4ABB499AF018974D47504 /* OfflineBrowser/App/BackgroundDelegate.swift */,
 				7F6D64CA216F1E634068DF24 /* OfflineBrowser/App/OfflineBrowserApp.swift */,
 				6ECB70E468DFCA34059E8D3B /* OfflineBrowser/Archive/ArchiveStore.swift */,
+				B8DD2F784AA94535825AE175 /* OfflineBrowser/Crawler/CrawlerCoordinator.swift */,
+				6B216C0853284ACCAC013B7F /* OfflineBrowser/Crawler/ReplaySession.swift */,
 				E8066A44A5A7AADCE0798682 /* OfflineBrowser/Discovery/AssetStrings.swift */,
 				E0166FF5798002615828DF27 /* OfflineBrowser/Discovery/DocumentRewriter.swift */,
 				4192811B95B2CF4C4FB70414 /* OfflineBrowser/Discovery/ModuleScanner.swift */,
@@ -122,6 +132,8 @@
 				930E230AE126C7147E843BA4 /* OfflineBrowser/Viewer/WebsiteSession.swift */,
 				0A16D54786CDAA617BD8ADBA /* OfflineBrowser/Views/LibraryView.swift */,
 				91428C72F0F104C9F5E1DD2C /* OfflineBrowser/Resources/Bridge */,
+				62EA279F2850426CBE64B7C4 /* OfflineBrowser/Resources/CrawlerConfig */,
+				41554B5E04AC4DE88570E67A /* OfflineBrowser/Resources/Replay */,
 				0C10F7C1EACEB823158FBA9D /* OfflineBrowser/PrivacyInfo.xcprivacy */,
 				A80AC5A1CE8A93DA9DC74C64 /* OfflineBrowser/Assets.xcassets */,
 				A00000000000000000000004 /* Products */,
@@ -222,6 +234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A25C955CEC003561A5FFAFF /* OfflineBrowser/Resources/Bridge in Resources */,
+				FC11C72B02964FA394AD9EF0 /* OfflineBrowser/Resources/CrawlerConfig in Resources */,
+				6341047C2DD04F89B202A7BF /* OfflineBrowser/Resources/Replay in Resources */,
 				76B24203970F704D0043F7B3 /* OfflineBrowser/PrivacyInfo.xcprivacy in Resources */,
 				57F9EE6B2534D09E798CC45B /* OfflineBrowser/Assets.xcassets in Resources */,
 			);
@@ -245,6 +259,8 @@
 				2279C79A2BDA29936FF7FD30 /* OfflineBrowser/App/BackgroundDelegate.swift in Sources */,
 				E681CC342ABA572CD4156773 /* OfflineBrowser/App/OfflineBrowserApp.swift in Sources */,
 				1061111359CC31D894550048 /* OfflineBrowser/Archive/ArchiveStore.swift in Sources */,
+				5097E40895E9424BBD0A1135 /* OfflineBrowser/Crawler/CrawlerCoordinator.swift in Sources */,
+				561C1C5E020346A1BBD5F084 /* OfflineBrowser/Crawler/ReplaySession.swift in Sources */,
 				5AD87F49A0818C8D2C9D31DD /* OfflineBrowser/Discovery/AssetStrings.swift in Sources */,
 				65E15E14EEA6F3C7429C6211 /* OfflineBrowser/Discovery/DocumentRewriter.swift in Sources */,
 				4A0B039F49C9F0C0E3107E04 /* OfflineBrowser/Discovery/ModuleScanner.swift in Sources */,

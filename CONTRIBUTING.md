@@ -1,46 +1,26 @@
-# Contributing to OfflineBrowser
+# Contributing
 
-Thank you for helping improve OfflineBrowser. The project is maintained as an
-experimental iOS/iPadOS application, so small, focused changes are easier to
-review and verify than broad rewrites.
+Thank you for helping improve OfflineBrowser. Small, focused pull requests are
+welcome, especially when they include a reproducible fixture or test.
 
 ## Before opening a pull request
 
-1. Read the public README and check whether the proposed behavior fits the
-   documented compatibility and privacy boundaries.
-2. Keep changes limited to the stated problem.
-3. Add or update a deterministic test when changing archive, URL mapping,
-   persistence, networking, or viewer behavior.
-4. Run the unsigned simulator build locally.
-5. Remove generated build products and personal data from the change.
+- Build the `OfflineBrowser` scheme for an iOS Simulator.
+- Run `git diff --check`.
+- Keep credentials, private archives, personal browser data, generated media,
+  and deployment-specific hostnames out of commits.
+- Update `THIRD_PARTY_NOTICES.md` when adding or replacing a dependency.
+- Do not make the optional Browsertrix service a requirement for the local
+  archive engine.
 
-## Local verification
+Changes to Browsertrix integration should preserve these boundaries:
 
-Use the build command in the README. The fixture server is:
+- the app remains useful when no crawler configuration is bundled;
+- remote jobs are explicit and cancellable;
+- completed archives are hash-verified before being stored locally;
+- replay does not silently fall back to the live website;
+- the service never receives an app signing credential or a private archive.
 
-```sh
-python3 -m http.server 19791 --bind 127.0.0.1 --directory TestSites
-```
-
-The simulator checks require a booted simulator. A simulator result does not
-prove behavior on a physical device, while background execution, lock-screen
-audio, Bluetooth interruptions, and large downloads are still device-specific.
-
-## Scope and data rules
-
-Do not commit:
-
-- website archives or downloaded resources;
-- audio collections, model files, or personal documents;
-- passwords, bearer tokens, private endpoints, or signing credentials;
-- site-specific staging scripts or private media adapters;
-- Xcode user state, build products, screenshots, or generated reports;
-- copied third-party site code unless its redistribution rights are clear.
-
-Use small synthetic fixtures under `TestSites` for reproducible tests.
-
-## Pull requests
-
-Describe the user-visible behavior, the affected boundary, the verification
-performed, and any remaining device-only limitations. Please do not submit
-automated or cosmetic changes merely to increase contribution counts.
+Please describe what you tested and what still requires device or deployment
+validation. The project is intentionally conservative about claims for
+arbitrary websites.

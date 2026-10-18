@@ -15,6 +15,12 @@ __pycache__/
 # Local website kits are generated fixtures, not app source.
 KitSites/
 
+# Optional Browsertrix configuration and generated server data.
+OfflineBrowser/Resources/CrawlerConfig/config.plist
+server/browsertrix/service.env
+server/browsertrix/crawls/
+server/browsertrix/jobs/
+
 # Generated verification output. Keep the hand-written Markdown/Swift reports.
 verification/*.log
 verification/*.png

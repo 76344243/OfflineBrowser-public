@@ -1,0 +1,9 @@
+[Unit]
+Description=OfflineBrowser optional Browsertrix service
+After=docker.service network.target
+[Service]
+EnvironmentFile=/opt/offline-browser/service.env
+ExecStart=/usr/bin/python3 /opt/offline-browser/service.py
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

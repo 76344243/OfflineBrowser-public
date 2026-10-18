@@ -31,6 +31,11 @@
 	</dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Lokale Testseiten und selbst gehostete Webseiten können über Ihr Netzwerk geladen werden.</string>
+	<key>WKAppBoundDomains</key>
+	<array>
+		<string>127.0.0.1</string>
+		<string>localhost</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

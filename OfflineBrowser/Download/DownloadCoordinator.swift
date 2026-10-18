@@ -10,8 +10,12 @@ import WebKit
     private var verifiers: [UUID:WebsiteSession] = [:]
     private var lastChecks = Date.distantPast
     private var runs: [UUID:UUID] = [:]
+    var crawler: CrawlerCoordinator?
+    var isViewing: () -> Bool = { false }
     init(store:LibraryStore,broker:ResourceBroker,archive:ArchiveStore,policy:NetworkPolicy) { self.store=store; self.broker=broker; self.archive=archive; self.policy=policy }
     func start(_ id:UUID, refresh:Bool=false, nextKit:OfflineKit? = nil) {
+        guard let entry=store.entry(id) else { return }
+        if entry.crawlerJob != nil { crawler?.start(id, refresh:refresh); return }
         guard tasks[id]==nil, let e=store.entry(id) else { return }
         guard store.online else { store.toast(ArchiveError.offline.localizedDescription); return }
         if e.job==nil {
@@ -25,12 +29,15 @@ import WebKit
         let runID=UUID(); runs[id]=runID
         tasks[id]=Task { [weak self] in await self?.run(id); if self?.runs[id]==runID { self?.tasks[id]=nil; self?.runs[id]=nil } }
     }
+    func startBrowsertrix(_ id:UUID, refresh:Bool = false) { crawler?.start(id, refresh:refresh) }
     func pause(_ id:UUID, phase:JobPhase = .pausedUser) {
+        if store.entry(id)?.crawlerJob != nil { crawler?.pause(id, phase:phase); return }
         runs[id]=nil; tasks.removeValue(forKey:id)?.cancel(); verifiers.removeValue(forKey:id)?.close()
         Task { await broker.cancel(id) }
         store.change(id) { $0.phase=phase; $0.message=phase == .pausedOffline ? "Offline · Fortsetzung möglich" : "Fortsetzung möglich" }
     }
     func discard(_ id:UUID) async {
+        if store.entry(id)?.crawlerJob != nil { await crawler?.discard(id); return }
         pause(id); guard let e=store.entry(id), let job=e.job else { return }
         try? await archive.removeGeneration(id,job.id)
         store.change(id) { $0.job=nil; $0.phase = e.activeGeneration == nil ? .none : .ready; $0.message=e.activeGeneration == nil ? (e.mode == .continuous ? "Laufend sichern · aktiv" : "Leerlauf") : "Gesicherte Version verfügbar"; $0.verified=e.activeGeneration != nil; if job.refreshing { $0.kit=job.previousKit ?? e.kit } }
@@ -188,9 +195,13 @@ import WebKit
     func updateBytes(_ id:UUID) async { if let bytes=try? await archive.bytes(id) { store.change(id) { $0.bytes=bytes } }; store.capacity() }
     func tick(checkUpdates: Bool = true) async {
         store.capacity()
-        for e in store.entries where e.phase != .resetting { if !e.busy { try? await archive.prune(e.id,keeping:["runtime",e.activeGeneration,e.job?.id].compactMap{$0}) }; await updateBytes(e.id); if e.phase == .pausedStorage, let now=store.availableBytes, let before=e.job?.storageCapacityAtPause, now>before+1024*1024 { start(e.id) } }
+        for e in store.entries where e.phase != .resetting && e.waczFile == nil && e.crawlerJob == nil {
+            if !e.busy { try? await archive.prune(e.id,keeping:["runtime",e.activeGeneration,e.job?.id].compactMap{$0}) }
+            await updateBytes(e.id)
+            if e.phase == .pausedStorage, let now=store.availableBytes, let before=e.job?.storageCapacityAtPause, now>before+1024*1024 { start(e.id) }
+        }
         guard checkUpdates, store.online, Date().timeIntervalSince(lastChecks)>300 else { return }; lastChecks=Date()
-        for e in store.entries where e.mode != .idle && !e.busy {
+        for e in store.entries where e.mode != .idle && !e.busy && e.waczFile == nil && e.crawlerJob == nil && !isViewing() {
             do {
                 let target=e.kitURL ?? e.startURL
                 let response=try await broker.raw(e.id,url:target); let service=try await broker.service(e.id); defer { service.dispose(response) }
@@ -201,6 +212,8 @@ import WebKit
     }
     func refresh(_ id:UUID) async {
         guard let e=store.entry(id), store.online else { store.toast(ArchiveError.offline.localizedDescription); return }
+        if e.crawlerJob != nil { crawler?.start(id, refresh:true); return }
+        if e.waczFile != nil { crawler?.start(id, refresh:true); return }
         if e.mode == .full {
             if let url=e.kitURL {
                 do { let response=try await broker.raw(id,url:url); let service=try await broker.service(id); defer { service.dispose(response) }; let kit=try JSONDecoder().decode(OfflineKit.self,from:Data(contentsOf:response.file)); try SupportProbe.validate(kit,base:url); if e.job != nil { store.toast("Setzen Sie zuerst den bestehenden Download fort oder verwerfen Sie ihn."); return }; start(id,refresh:true,nextKit:kit); return } catch { store.toast(error.localizedDescription); return }
@@ -223,10 +236,11 @@ import WebKit
         dataStore.removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince:.distantPast) { }
     }
     func reset(_ id:UUID, mode:StorageMode, delete:Bool=false) async {
+        if let e=store.entry(id), e.crawlerJob != nil || e.waczFile != nil { await crawler?.discard(id, eraseArchive:true) }
         pause(id); store.change(id) { $0.phase = .resetting; $0.message="Webseitendaten werden gelöscht" }
         Self.clearWebsiteData(id)
         await broker.clear(id); try? await archive.erase(id)
         if delete { store.entries.removeAll { $0.id==id }; store.save() }
-        else { store.change(id) { $0.mode=mode; $0.job=nil; $0.activeGeneration=nil; $0.phase = .none; $0.bytes=0; $0.verified=false; $0.message=mode == .idle ? "Leerlauf" : "Laufend sichern · aktiv"; $0.report=[]; $0.lastVisitedURL=nil } }
+        else { store.change(id) { $0.mode=mode; $0.job=nil; $0.waczFile=nil; $0.waczPages=nil; $0.crawlerJob=nil; $0.activeGeneration=nil; $0.phase = .none; $0.bytes=0; $0.verified=false; $0.message=mode == .idle ? "Leerlauf" : "Laufend sichern · aktiv"; $0.report=[]; $0.lastVisitedURL=nil } }
     }
 }

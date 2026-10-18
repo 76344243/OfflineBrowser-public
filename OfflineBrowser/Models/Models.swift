@@ -25,6 +25,11 @@ struct WebsiteEntry: Codable, Identifiable {
     var kit: OfflineKit?
     var activeGeneration: String?
     var job: DownloadJob?
+    // Optional Browsertrix/WACZ state. Optional fields keep libraries created
+    // by earlier app versions decodable without a migration step.
+    var waczPages: [String]?
+    var waczFile: String?
+    var crawlerJob: CrawlerJob?
     var bytes: Int64 = 0
     var updateAvailable = false
     var lastUpdate: Date?
@@ -34,7 +39,7 @@ struct WebsiteEntry: Codable, Identifiable {
     var verified = false
     var allowedOrigins: [String] = []
     var startURL: URL { guard let kit, let kitURL else { return url }; return URL(string: kit.offlineEntry ?? kit.entry, relativeTo: kitURL)?.absoluteURL ?? url }
-    var busy: Bool { [.discovering, .downloading, .retrying, .verifying].contains(phase) }
+    var busy: Bool { [.discovering, .downloading, .retrying, .verifying].contains(phase) || crawlerJob != nil }
     var downloaded: Int { job?.items.filter { $0.done }.count ?? 0 }
     var total: Int { job?.items.count ?? 0 }
 }

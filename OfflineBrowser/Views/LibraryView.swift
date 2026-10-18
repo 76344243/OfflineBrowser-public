@@ -11,6 +11,7 @@ struct LibraryView: View {
     @State private var presented:WebsiteEntry?
     @State private var confirmation:Confirmation?
     @State private var showingReport:WebsiteEntry?
+    @AppStorage(CrawlerConfiguration.depthKey) private var crawlDepth = CrawlerConfiguration.defaultDepth
     @FocusState private var addressFocused:Bool
     @Environment(\.scenePhase) private var scene
     init(environment:AppEnvironment) { self.environment=environment; store=environment.store }
@@ -28,6 +29,27 @@ struct LibraryView: View {
                     Picker("Internetzugriff",selection:Binding(get:{store.online},set:{environment.downloads.setOnline($0)})) { Label("Online",systemImage:"wifi").tag(true); Label("Offline",systemImage:"wifi.slash").tag(false) }.pickerStyle(.segmented).accessibilityIdentifier("networkMode")
                     HStack { Image(systemName:"internaldrive"); Text(store.availableBytes.map { "Verfügbarer Speicher: " + Self.bytes($0) } ?? "Verfügbarer Speicher unbekannt"); Spacer() }.font(.footnote).foregroundStyle(.secondary)
                     if let capacity=store.availableBytes, capacity<500*1024*1024 { Label("Nur noch wenig Speicher verfügbar.",systemImage:"exclamationmark.triangle").font(.footnote).foregroundStyle(.orange) }
+                    GroupBox {
+                        VStack(alignment:.leading,spacing:10) {
+                            Label("Lokale Archivierung",systemImage:"internaldrive").font(.subheadline.weight(.semibold))
+                            Text("Die Standardfunktion arbeitet vollständig auf diesem Gerät und benötigt keinen eigenen Server.").font(.footnote).foregroundStyle(.secondary)
+                            Label("Browsertrix für komplexe Webseiten",systemImage:"server.rack").font(.subheadline.weight(.semibold))
+                            Text("Optional kann ein eigener Browsertrix-Dienst JavaScript-lastige Seiten serverseitig erfassen. Das Ergebnis wird als WACZ-Datei lokal gespeichert und offline wiedergegeben.").font(.footnote).foregroundStyle(.secondary)
+                            if environment.crawler.configured {
+                                HStack {
+                                    Text("Erfassungstiefe")
+                                    Spacer()
+                                    Picker("Erfassungstiefe",selection:$crawlDepth) {
+                                        Text("Nur Startseite").tag(0)
+                                        Text("2 Ebenen").tag(2)
+                                        Text("3 Ebenen").tag(3)
+                                        Text("5 Ebenen").tag(5)
+                                        Text("Ohne Begrenzung").tag(-1)
+                                    }.pickerStyle(.menu)
+                                }.font(.footnote)
+                            }
+                        }.frame(maxWidth:.infinity,alignment:.leading)
+                    } label: { Text("ARCHIVIERUNGSOPTIONEN").font(.caption.weight(.semibold)).foregroundStyle(.secondary) }
                     VStack(alignment:.leading,spacing:10) {
                         Text("WEBSEITE HINZUFÜGEN").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
                         HStack(spacing:10) {
@@ -53,9 +75,15 @@ struct LibraryView: View {
                 Button(probe?.kit != nil ? "Ja" : (probe?.loginRequired == true ? "Eintrag zur Anmeldung anlegen" : "Versuchter Download")) { addProbed() }
                 Button("Jetzt nicht",role:.cancel) { cancelProbe() }
             } message: { Text(probeText) }
-            .fullScreenCover(item:$presented) { entry in ViewerScreen(entry:entry,environment:environment,onReturn:{ presented=nil }) }
+            .fullScreenCover(item:$presented) { entry in
+                if let file=environment.crawler.file(entry), FileManager.default.fileExists(atPath:file.path) {
+                    ReplayScreen(entry:entry,file:file,environment:environment,onReturn:{ presented=nil })
+                } else {
+                    ViewerScreen(entry:entry,environment:environment,onReturn:{ presented=nil })
+                }
+            }
             .sheet(item:$showingReport) { entry in NavigationStack { List { Section("Bereich") { Text(entry.scope.absoluteString) }; Section("Prüfbericht") { ForEach(entry.report,id:\.self) { Text($0) }; if entry.report.isEmpty { Text("Noch keine Offline-Prüfung durchgeführt.") } } }.navigationTitle("Website-Prüfung").toolbar { Button("Schließen") { showingReport=nil } } } }
-            .task { await environment.reconcile(); while !Task.isCancelled { await environment.downloads.tick(checkUpdates:scene == .active && environment.viewer == nil); try? await Task.sleep(for:.seconds(store.entries.contains(where:{$0.busy}) ? 1 : 5)) } }
+            .task { await environment.reconcile(); while !Task.isCancelled { await environment.downloads.tick(checkUpdates:scene == .active && environment.viewer == nil && environment.replay == nil); try? await Task.sleep(for:.seconds(store.entries.contains(where:{$0.busy}) ? 1 : 5)) } }
             .onChange(of:scene) { _,phase in if phase == .active { Task { await environment.downloads.tick() } } }
         }
         #if DEBUG
@@ -92,14 +120,20 @@ struct LibraryView: View {
             Button {
                 addressFocused=false
                 Task {
-                    if !store.online {
+                    if e.waczFile != nil, let file=environment.crawler.file(e), !FileManager.default.fileExists(atPath:file.path) {
+                        store.toast("Das lokale Browsertrix-Archiv ist nicht verfügbar."); return
+                    }
+                    if e.waczFile == nil && !store.online {
                         guard (try? await environment.broker.cached(e.id,url:e.startURL)) != nil else { store.toast(ArchiveError.offline.localizedDescription); return }
                     }
                     presented=store.entry(e.id) ?? e
                 }
-            } label: { HStack { Image(systemName:e.kit == nil ? "globe" : "checkmark.shield").font(.title2).foregroundStyle(.teal); Text(e.url.absoluteString).font(.headline).lineLimit(2).multilineTextAlignment(.leading); Spacer(); Image(systemName:"chevron.right").foregroundStyle(.secondary) } }.buttonStyle(.plain).disabled(e.phase == .verifying || (e.mode == .idle && e.activeGeneration == nil && e.phase != .needsLogin)).accessibilityIdentifier("open-\(e.id)")
+            } label: { HStack { Image(systemName:e.waczFile != nil ? "server.rack" : (e.kit == nil ? "globe" : "checkmark.shield")).font(.title2).foregroundStyle(.teal); Text(e.url.absoluteString).font(.headline).lineLimit(2).multilineTextAlignment(.leading); Spacer(); Image(systemName:"chevron.right").foregroundStyle(.secondary) } }.buttonStyle(.plain).disabled(e.phase == .verifying || (e.mode == .idle && e.activeGeneration == nil && e.waczFile == nil && e.phase != .needsLogin)).accessibilityIdentifier("open-\(e.id)")
             HStack { Text(e.message).font(.subheadline).foregroundStyle(e.phase == .retrying || e.phase == .unsupported ? .orange : .secondary); Spacer(); Text(Self.bytes(e.bytes) + ((store.transferBytes[e.id]?.values.reduce(0,+) ?? 0)>0 ? " · "+Self.bytes(store.transferBytes[e.id]!.values.reduce(0,+))+" laden" : "")).font(.caption.monospacedDigit()).foregroundStyle(.secondary) }
-            if e.job != nil {
+            if let crawlerJob=e.crawlerJob {
+                ProgressView(value:Double(crawlerJob.done),total:Double(max(1,crawlerJob.total))).tint(e.phase == .retrying ? .orange : .teal)
+                Text("Browsertrix: \(crawlerJob.done) von \(max(1,crawlerJob.total)) Seiten").font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+            } else if e.job != nil {
                 ProgressView(value:Double(e.downloaded),total:Double(max(1,e.total))).tint(e.phase == .retrying ? .orange : .teal)
                 Text("Elemente geladen: \(e.downloaded) von \(e.total)\(e.kit == nil ? " · weitere werden gesucht" : "")").font(.caption.monospacedDigit()).foregroundStyle(.secondary)
             }
@@ -112,14 +146,17 @@ struct LibraryView: View {
     }
     private func modeButtons(_ e:WebsiteEntry) -> some View {
         Group {
-            Button(e.busy ? "Vollständig · Abbrechen" : (e.job != nil ? "Fortsetzen" : "Vollständig")) { full(e) }.tint(e.mode == .full || e.job != nil ? .teal : .gray).buttonStyle(.bordered)
-            Button("Laufend sichern") { continuous(e) }.tint(e.mode == .continuous && e.job == nil ? .teal : .gray).buttonStyle(.bordered).disabled(e.busy)
+            Button(e.busy ? (e.crawlerJob != nil ? "Browsertrix · Abbrechen" : "Vollständig · Abbrechen") : (e.job != nil || e.crawlerJob != nil ? "Fortsetzen" : "Vollständig")) { full(e) }.tint(e.mode == .full || e.job != nil || e.crawlerJob != nil ? .teal : .gray).buttonStyle(.bordered)
+            if environment.crawler.configured {
+                Button(e.crawlerJob != nil ? "Browsertrix · Fortsetzen" : (e.waczFile != nil ? "Browsertrix · Aktualisieren" : "Browsertrix")) { browsertrix(e) }.tint(e.waczFile != nil || e.crawlerJob != nil ? .teal : .gray).buttonStyle(.bordered).disabled(e.busy && e.crawlerJob == nil)
+            }
+            Button("Laufend sichern") { continuous(e) }.tint(e.mode == .continuous && e.job == nil && e.crawlerJob == nil ? .teal : .gray).buttonStyle(.bordered).disabled(e.busy)
         }.font(.caption.weight(.semibold))
     }
     private func utilityButtons(_ e:WebsiteEntry) -> some View {
         Group {
-            Button { confirmation=Confirmation(text:"Cache zurücksetzen? Die Wiedergabe dieses Eintrags wird beendet.",actions:[Action(title:"Zurücksetzen",destructive:true) { reset(e,mode:.continuous) }]) } label: { Image(systemName:"arrow.counterclockwise") }.disabled(e.mode != .continuous || e.job != nil).accessibilityLabel("Zurücksetzen")
-            Button { Task { await environment.downloads.refresh(e.id) } } label: { Image(systemName:"arrow.triangle.2.circlepath"); if e.updateAvailable { Circle().fill(.teal).frame(width:6,height:6) } }.disabled(e.mode == .idle || e.job != nil || !store.online).accessibilityLabel("Refresh")
+            Button { confirmation=Confirmation(text:"Cache zurücksetzen? Die Wiedergabe dieses Eintrags wird beendet.",actions:[Action(title:"Zurücksetzen",destructive:true) { reset(e,mode:.continuous) }]) } label: { Image(systemName:"arrow.counterclockwise") }.disabled(e.mode != .continuous || e.job != nil || e.crawlerJob != nil).accessibilityLabel("Zurücksetzen")
+            Button { Task { await environment.downloads.refresh(e.id) } } label: { Image(systemName:"arrow.triangle.2.circlepath"); if e.updateAvailable { Circle().fill(.teal).frame(width:6,height:6) } }.disabled(e.mode == .idle || e.job != nil || e.crawlerJob != nil || (e.waczFile != nil && !environment.crawler.configured) || !store.online).accessibilityLabel("Refresh")
             Button { confirmation=Confirmation(text:"Sind Sie sicher? Die gespeicherten Daten werden gelöscht und die Wiedergabe beendet.",actions:[Action(title:"Eintrag löschen",destructive:true) { reset(e,mode:.idle,delete:true) }]) } label: { Image(systemName:"trash") }.accessibilityLabel("Eintrag löschen")
         }.buttonStyle(.bordered).tint(.secondary)
     }
@@ -127,13 +164,23 @@ struct LibraryView: View {
         if e.busy {
             environment.downloads.pause(e.id)
             confirmation=Confirmation(text:"Geladene Daten für Fortsetzung behalten oder löschen?",actions:[Action(title:"Behalten") {},Action(title:"Löschen",destructive:true) { Task { await environment.downloads.discard(e.id) } },Action(title:"Weiterladen") { environment.downloads.start(e.id) }],onCancel:{ environment.downloads.start(e.id) })
-        } else if e.job != nil { environment.downloads.start(e.id) }
+        } else if e.job != nil || e.crawlerJob != nil { environment.downloads.start(e.id) }
         else if e.mode == .full { idle(e) }
         else { environment.downloads.start(e.id) }
     }
+    private func browsertrix(_ e:WebsiteEntry) {
+        if e.busy {
+            environment.downloads.pause(e.id)
+            confirmation=Confirmation(text:"Die laufende Browsertrix-Erfassung anhalten? Der Serverjob bleibt für eine spätere Fortsetzung erhalten.",actions:[Action(title:"Behalten") {},Action(title:"Löschen",destructive:true) { Task { await environment.downloads.discard(e.id) } },Action(title:"Weiter") { environment.downloads.start(e.id) }],onCancel:{ environment.downloads.start(e.id) })
+        } else if e.crawlerJob != nil {
+            environment.downloads.start(e.id)
+        } else {
+            environment.downloads.startBrowsertrix(e.id,refresh:e.waczFile != nil)
+        }
+    }
     private func continuous(_ e:WebsiteEntry) {
         if e.mode == .continuous { idle(e) }
-        else if e.mode == .full || e.job != nil { confirmation=Confirmation(text:"Bei Aktivierung laufender Speicherung wird der Website Cache vollständig gelöscht. Sind sie sicher?",actions:[Action(title:"Ja",destructive:true) { reset(e,mode:.continuous) },Action(title:"Nein") {}]) }
+        else if e.mode == .full || e.job != nil || e.crawlerJob != nil || e.waczFile != nil { confirmation=Confirmation(text:"Bei Aktivierung laufender Speicherung wird der Website Cache vollständig gelöscht. Sind sie sicher?",actions:[Action(title:"Ja",destructive:true) { reset(e,mode:.continuous) },Action(title:"Nein") {}]) }
         else { store.change(e.id) { $0.mode = .continuous; $0.message="Laufend sichern · aktiv" } }
     }
     private func idle(_ e:WebsiteEntry) { confirmation=Confirmation(text:"Möchten Sie wirklich in den Leerlauf gehen? Dabei werden alle gesicherten Webseitendaten gelöscht. Die Wiedergabe wird beendet.",actions:[Action(title:"Ja",destructive:true) { reset(e,mode:.idle) },Action(title:"Nein") {}]) }

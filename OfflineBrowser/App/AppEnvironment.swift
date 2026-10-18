@@ -7,7 +7,9 @@ import Combine
     let policy: NetworkPolicy
     let broker: ResourceBroker
     let downloads: DownloadCoordinator
+    let crawler: CrawlerCoordinator
     var viewer: WebsiteSession?
+    var replay: ReplaySession?
     init() {
         #if DEBUG
         let testFlag=CommandLine.arguments.first { $0.hasSuffix("-test") }
@@ -20,9 +22,22 @@ import Combine
          archive = ArchiveStore(root:store.root); policy = NetworkPolicy()
         policy.setOnline(store.online); broker = ResourceBroker(store:store,archive:archive,policy:policy)
         downloads = DownloadCoordinator(store:store,broker:broker,archive:archive,policy:policy)
+        crawler = CrawlerCoordinator(store:store,archive:archive)
+        downloads.crawler = crawler
+        downloads.isViewing = { [weak self] in self?.viewer != nil || self?.replay != nil }
     }
     func reconcile() async {
-        for entry in store.entries where entry.activeGeneration != nil {
+        for entry in store.entries where entry.waczFile != nil {
+            guard let file = crawler.file(entry), FileManager.default.fileExists(atPath:file.path) else {
+                store.change(entry.id) { e in
+                    e.waczFile = nil; e.waczPages = nil; e.crawlerJob = nil
+                    e.phase = .none; e.verified = false; e.bytes = 0
+                    e.message = "Browsertrix-Archiv fehlt · erneut möglich"
+                }
+                continue
+            }
+        }
+        for entry in store.entries where entry.activeGeneration != nil && entry.waczFile == nil && entry.crawlerJob == nil {
             let generation=entry.activeGeneration!
             let records=(try? await archive.records(entry.id,generation:generation)) ?? []
             var missing=records.isEmpty
